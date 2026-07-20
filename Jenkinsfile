@@ -35,6 +35,11 @@ pipeline {
 		        withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { 
                 sh "mvn sonar:sonar"
 		        }
-	      }
-    }
-}	
+	         }
+          }
+        }	
+	}
+}
+
+
+		
