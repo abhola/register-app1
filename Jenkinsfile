@@ -5,7 +5,7 @@ pipeline {
         maven 'Maven3'
     }
    
-    environment {
+  /*  environment {
 	    APP_NAME = "register-app-pipeline1"
             RELEASE = "1.0.0"
             DOCKER_USER = "bholaan"
@@ -13,7 +13,7 @@ pipeline {
             IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
             IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
 		    JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN") 
-	        }
+	        } */
 	   
     stages{
         stage("Cleanup Workspace"){
