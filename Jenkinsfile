@@ -39,25 +39,21 @@ pipeline {
                  sh "mvn test"
            }
        }
-       stage("SonarQube Analysis"){
-           steps {
-	           script {
-		        withSonarQubeEnv(credentialsId: 'Jenkins-SonarQube-token') { 
-         /*       sh "mvn sonar:sonar"    */
+       stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonarqube-server') {
                 sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar'
-		        }
-	         }
-          }
-        }	
-      
-     stage("Quality Gate"){
-           steps {
-               script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Jenkins-SonarQube-token'
-                  }	
-               }
+        }
+    }
+}
 
-          }
+       stage('Quality Gate') {
+           steps {
+              timeout(time: 10, unit: 'MINUTES') {
+              waitForQualityGate abortPipeline: false
+        }
+    }
+}
      /*  stage("Build & Push Docker Image") {
             steps {
                 script {
